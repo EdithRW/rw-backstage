@@ -27,6 +27,12 @@ import {
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 
+/* import MyCustomLogoFull from './rw-logo.png';
+
+const LogoFull = () => {
+  return <img src={MyCustomLogoFull} />;
+}; */
+
 const useSidebarLogoStyles = makeStyles({
   root: {
     width: sidebarConfig.drawerWidthClosed,
