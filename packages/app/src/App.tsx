@@ -36,6 +36,7 @@ import { catalogEntityCreatePermission } from '@backstage/plugin-catalog-common/
 
 import { githubAuthApiRef } from '@backstage/core-plugin-api';
 import { SignInProviderConfig, SignInPage } from '@backstage/core-components';
+import { TestOnePage } from '@internal/plugin-test-one';
 
 const githubProvider: SignInProviderConfig = {
   id: 'github-auth-provider',
@@ -112,6 +113,7 @@ const routes = (
     </Route>
     <Route path="/settings" element={<UserSettingsPage />} />
     <Route path="/catalog-graph" element={<CatalogGraphPage />} />
+    <Route path="/test-one" element={<TestOnePage />} />
   </FlatRoutes>
 );
 
