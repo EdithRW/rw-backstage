@@ -28,6 +28,13 @@ interface Order {
   status: 'pending' | 'delivered' | 'refunded';
 }
 
+interface Case {
+  caseID: string;
+  operator: string;
+  createdAt: number;
+  status: 'pending' | 'delivered' | 'refunded';
+}
+
 const statusMap = {
   pending: 'warning',
   delivered: 'success',
@@ -35,26 +42,26 @@ const statusMap = {
 };
 
 interface OverviewLatestOrdersProps {
-  orders: Order[];
+  cases: Case[]| null;
   sx?: any;
 }
 
 export const OverviewLatestOrders: React.FC<OverviewLatestOrdersProps> = (props) => {
-  const { orders = [], sx } = props;
+  const { cases = [], sx } = props;
 
   return (
     <Card sx={sx}>
-      <CardHeader title="Latest Orders" />
+      <CardHeader title="Latest Cases" />
       <Scrollbar sx={{ flexGrow: 1 }}>
         <Box sx={{ minWidth: 800 }}>
           <Table>
             <TableHead>
               <TableRow>
                 <TableCell>
-                  Order
+                  Case ID
                 </TableCell>
                 <TableCell>
-                  Customer
+                  Operator
                 </TableCell>
                 <TableCell sortDirection="desc">
                   Date
@@ -65,26 +72,26 @@ export const OverviewLatestOrders: React.FC<OverviewLatestOrdersProps> = (props)
               </TableRow>
             </TableHead>
             <TableBody>
-              {orders.map((order) => {
-                const createdAt = format(order.createdAt, 'dd/MM/yyyy');
+            {cases && cases.map((item) => {
+                const createdAt = format(item.createdAt, 'dd/MM/yyyy');
 
                 return (
                   <TableRow
                     hover
-                    key={order.id}
+                    key={item.caseID}
                   >
                     <TableCell>
-                      {order.ref}
+                      {item.caseID}
                     </TableCell>
                     <TableCell>
-                      {order.customer.name}
+                      {item.operator}
                     </TableCell>
                     <TableCell>
                       {createdAt}
                     </TableCell>
                     <TableCell>
-                      <SeverityPill color={statusMap[order.status]}>
-                        {order.status}
+                      <SeverityPill color={statusMap[item.status]}>
+                        {item.status}
                       </SeverityPill>
                     </TableCell>
                   </TableRow>
@@ -114,12 +121,9 @@ export const OverviewLatestOrders: React.FC<OverviewLatestOrdersProps> = (props)
 };
 
 OverviewLatestOrders.prototype = {
-  orders: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    ref: PropTypes.string.isRequired,
-    customer: PropTypes.shape({
-      name: PropTypes.string.isRequired
-    }).isRequired,
+  cases: PropTypes.arrayOf(PropTypes.shape({
+    caseID: PropTypes.string.isRequired,
+    operator: PropTypes.string.isRequired,
     createdAt: PropTypes.instanceOf(Date).isRequired,
     status: PropTypes.oneOf(['pending', 'delivered', 'refunded']).isRequired
   })),

@@ -36,7 +36,9 @@ import { catalogEntityCreatePermission } from '@backstage/plugin-catalog-common/
 
 import { githubAuthApiRef } from '@backstage/core-plugin-api';
 import { SignInProviderConfig, SignInPage } from '@backstage/core-components';
+
 import { TestOnePage } from '@internal/plugin-test-one';
+import { PegaDashboardPage } from '@internal/plugin-pega-dashboard'
 
 const githubProvider: SignInProviderConfig = {
   id: 'github-auth-provider',
@@ -114,6 +116,7 @@ const routes = (
     <Route path="/settings" element={<UserSettingsPage />} />
     <Route path="/catalog-graph" element={<CatalogGraphPage />} />
     <Route path="/test-one" element={<TestOnePage />} />
+    <Route path="/pega" element={<PegaDashboardPage />} />
   </FlatRoutes>
 );
 

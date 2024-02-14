@@ -2,6 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Table, TableColumn, Progress, ResponseErrorPanel } from '@backstage/core-components';
 import useAsync from 'react-use/lib/useAsync';
+import axios from 'axios';
 
 export const exampleUsers = {
   "results": [
@@ -236,50 +237,37 @@ const useStyles = makeStyles({
   },
 });
 
-type User = {
-  gender: string; // "male"
-  name: {
-    title: string; // "Mr",
-    first: string; // "Duane",
-    last: string; // "Reed"
-  };
-  email: string; // "duane.reed@example.com"
-  picture: string; // "https://api.dicebear.com/6.x/open-peeps/svg?seed=Duane"
-  nat: string; // "AU"
+type App = {
+  name: string; // "male"
+  description: string; // "duane.reed@example.com"
+  ID: string; // "https://api.dicebear.com/6.x/open-peeps/svg?seed=Duane"
+  version: string; // "AU"
 };
 
 type DenseTableProps = {
-  users: User[];
+  users: App[];
 };
 
 export const DenseTable = ({ users }: DenseTableProps) => {
   const classes = useStyles();
 
   const columns: TableColumn[] = [
-    { title: 'Avatar', field: 'avatar' },
     { title: 'Name', field: 'name' },
-    { title: 'Email', field: 'email' },
-    { title: 'Nationality', field: 'nationality' },
+    { title: 'ID', field: 'ID' },
+    { title: 'Version', field: 'version' },
   ];
 
   const data = users.map(user => {
     return {
-      avatar: (
-        <img
-          src={user.picture}
-          className={classes.avatar}
-          alt={user.name.first}
-        />
-      ),
-      name: `${user.name.first} ${user.name.last}`,
-      email: user.email,
-      nationality: user.nat,
+      name: user.name,
+      ID: user.ID,
+      version: user.version,
     };
   });
 
   return (
     <Table
-      title="Example User List"
+      title="Example App List"
       options={{ search: false, paging: false }}
       columns={columns}
       data={data}
@@ -289,9 +277,28 @@ export const DenseTable = ({ users }: DenseTableProps) => {
 
 export const ExampleFetchComponent = () => {
 
-  const { value, loading, error } = useAsync(async (): Promise<User[]> => {
+  const { value, loading, error } = useAsync(async (): Promise<App[]> => {
+
+    const username = 'edith.saldana';
+    const password = 'rulesrw24!';
+    // Base64 encode the username and password
+    const base64Credentials = btoa(`${username}:${password}`);
+    // Replace 'your_api_url' with the actual API endpoint you want to call
+    const apiUrl = 'https://dev-rfs-02.rulesware.com:443/prweb/api/v1/applications';
+    // Make the Fetch API call with basic authentication using Axios
+    
+    const response = await axios.get(apiUrl, {
+      headers: {
+        'Authorization': `Basic ${base64Credentials}`,
+        'Content-Type': 'application/json', // Set your content type if required
+      },
+    });
+
+
+    //return await response.json() as App[];
     // Would use fetch in a real world example
-    return exampleUsers.results;
+    return response.data.applications;
+    
   }, []);
 
   
