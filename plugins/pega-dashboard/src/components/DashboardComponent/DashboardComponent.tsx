@@ -1,24 +1,20 @@
-import React, { useEffect, useState } from 'react';
-import { Grid, Paper } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+import React, { FC, useState, useEffect } from 'react';
 
-import { OverviewLatestOrders } from '../CaseListComponent';
-
+import { subDays, subHours } from 'date-fns';
+import { Box, Container, Unstable_Grid2 as Grid } from '@mui/material';
 
 import { OverviewBudget } from '../BudgetComponent/BudgetComponent';
 import { OverviewTasksProgress } from '../TaskProgressComponent/TaskProgressComponent';
+import { OverviewLatestOrders } from '../CaseListComponent/CaseListComponent';
 import { Case } from '../../models/Case';
-import { fetchCases, fetchResultCount, fetchCompliance } from './GetCases';
+import { fetchCases, fetchCompliance, fetchResultCount } from './GetCases';
 
-const useStyles = makeStyles((theme) => ({
-  paper: {
-    margin: theme.spacing(2),
-    height: '100%',
-  },
-}));
+
+
+const now = new Date();
 
 export const DashboardPage: React.FC = () => {
-  const classes = useStyles();
+
   
   const [cases, setCases] = useState<Case[] | null>(null);
   const [resultCount, setResultCount] = useState<number | null>(null);
@@ -42,41 +38,91 @@ export const DashboardPage: React.FC = () => {
   }, []);
   
   return (
+
+    <Box
+      component="main"
+      sx={{
+        flexGrow: 1,
+        py: 8
+      }}
+    >
+      <Container maxWidth="xl">
+        <Grid
+          container
+          spacing={3}
+        >
+          <Grid
+            xs={12}
+            sm={6}
+            lg={3}
+          >
+            <OverviewBudget
+              difference={12}
+              positive
+              sx={{ height: '100%' }}
+              value={resultCount?.toString() || "Loading..."}
+            />
+          </Grid>
+          <Grid
+            xs={12}
+            sm={6}
+            lg={3}
+          >
+            
+          </Grid>
+          <Grid
+            xs={12}
+            sm={6}
+            lg={3}
+          >
+            <OverviewTasksProgress
+              sx={{ height: '100%' }}
+              value={compliance ?? 0}
+            />
+          </Grid>
+          <Grid
+            xs={12}
+            sm={6}
+            lg={3}
+          >
+            
+          </Grid>
+          <Grid
+            xs={12}
+            lg={8}
+          >
+            
+          </Grid>
+          <Grid
+            xs={12}
+            md={6}
+            lg={4}
+          >
+            
+          </Grid>
+          <Grid
+            xs={12}
+            md={6}
+            lg={4}
+          >
+            
+          </Grid>
+          <Grid
+            xs={12}
+            md={12}
+            lg={8}
+          >
+            <OverviewLatestOrders
+              cases={cases}
+              sx={{ height: '100%' }}
+            />
+          </Grid>
+        </Grid>
+      </Container>
+    </Box>
     
-    <Grid container spacing={3}>
-
-      <Grid item xs={3}>
-        <Paper className={classes.paper} elevation={1}>
-          <OverviewTasksProgress
-            sx={{ height: '100%' }}
-            value={compliance  ?? 0}
-          />
-        </Paper>
-      </Grid>
-
-      <Grid item xs={3}>
-        <Paper className={classes.paper}>
-          <OverviewBudget
-            difference={100}
-            positive
-            sx={{ height: '100%' }}
-            value={resultCount?.toString() || "Loading..."}
-          />
-        </Paper>
-      </Grid>
-    
-      <Grid item xs={12}>
-        <Paper className={classes.paper}>
-          <OverviewLatestOrders
-            cases={cases}
-            sx={{ height: '100%' }}
-          />
-        </Paper>
-      </Grid>
-
-    </Grid>
     );
   };
-  
-  export default DashboardPage;
-  
+
+
+export default DashboardPage;
