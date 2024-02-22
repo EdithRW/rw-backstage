@@ -280,7 +280,7 @@ export const ExampleFetchComponent = () => {
   const { value, loading, error } = useAsync(async (): Promise<App[]> => {
 
     const username = 'edith.saldana';
-    const password = 'rulesrw24!';
+    const password = 'Zandunga23!';
     // Base64 encode the username and password
     const base64Credentials = btoa(`${username}:${password}`);
     // Replace 'your_api_url' with the actual API endpoint you want to call

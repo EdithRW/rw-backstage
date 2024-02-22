@@ -13,6 +13,8 @@ import { fetchCases, fetchCompliance, fetchResultCount } from './GetCases';
 
 const now = new Date();
 
+
+
 export const DashboardPage: React.FC = () => {
 
   
@@ -54,7 +56,7 @@ export const DashboardPage: React.FC = () => {
           <Grid
             xs={12}
             sm={6}
-            lg={3}
+            lg={6}
           >
             <OverviewBudget
               difference={12}
@@ -63,54 +65,23 @@ export const DashboardPage: React.FC = () => {
               value={resultCount?.toString() || "Loading..."}
             />
           </Grid>
+          
           <Grid
             xs={12}
             sm={6}
-            lg={3}
-          >
-            
-          </Grid>
-          <Grid
-            xs={12}
-            sm={6}
-            lg={3}
+            lg={6}
           >
             <OverviewTasksProgress
               sx={{ height: '100%' }}
               value={compliance ?? 0}
             />
           </Grid>
-          <Grid
-            xs={12}
-            sm={6}
-            lg={3}
-          >
-            
-          </Grid>
-          <Grid
-            xs={12}
-            lg={8}
-          >
-            
-          </Grid>
-          <Grid
-            xs={12}
-            md={6}
-            lg={4}
-          >
-            
-          </Grid>
-          <Grid
-            xs={12}
-            md={6}
-            lg={4}
-          >
-            
-          </Grid>
+          
+          
           <Grid
             xs={12}
             md={12}
-            lg={8}
+            lg={12}
           >
             <OverviewLatestOrders
               cases={cases}
@@ -120,7 +91,7 @@ export const DashboardPage: React.FC = () => {
         </Grid>
       </Container>
     </Box>
-    
+
     );
   };
 
