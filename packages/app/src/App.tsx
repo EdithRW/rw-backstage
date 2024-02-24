@@ -39,6 +39,8 @@ import { SignInProviderConfig, SignInPage } from '@backstage/core-components';
 
 import { TestOnePage } from '@internal/plugin-test-one';
 import { PegaDashboardPage } from '@internal/plugin-pega-dashboard'
+import { RwPegaPage } from '@internal/plugin-rw-pega';
+
 
 const githubProvider: SignInProviderConfig = {
   id: 'github-auth-provider',
@@ -117,6 +119,7 @@ const routes = (
     <Route path="/catalog-graph" element={<CatalogGraphPage />} />
     <Route path="/test-one" element={<TestOnePage />} />
     <Route path="/pega" element={<PegaDashboardPage />} />
+    <Route path="/rw-pega" element={<RwPegaPage />} />
   </FlatRoutes>
 );
 
