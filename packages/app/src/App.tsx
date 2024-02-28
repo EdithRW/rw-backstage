@@ -40,6 +40,7 @@ import { SignInProviderConfig, SignInPage } from '@backstage/core-components';
 import { TestOnePage } from '@internal/plugin-test-one';
 import { PegaDashboardPage } from '@internal/plugin-pega-dashboard'
 import { RwPegaPage } from '@internal/plugin-rw-pega';
+import { PegaConsolePage } from '@internal/plugin-pega-console';
 
 
 const githubProvider: SignInProviderConfig = {
@@ -120,6 +121,7 @@ const routes = (
     <Route path="/test-one" element={<TestOnePage />} />
     <Route path="/pega" element={<PegaDashboardPage />} />
     <Route path="/rw-pega" element={<RwPegaPage />} />
+    <Route path="/pega-console" element={<PegaConsolePage />} />
   </FlatRoutes>
 );
 

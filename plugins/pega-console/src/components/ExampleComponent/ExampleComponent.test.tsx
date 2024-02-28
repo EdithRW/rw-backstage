@@ -22,6 +22,6 @@ describe('ExampleComponent', () => {
 
   it('should render', async () => {
     await renderInTestApp(<ExampleComponent />);
-    expect(screen.getByText('Welcome to rw-pega!')).toBeInTheDocument();
+    expect(screen.getByText('Welcome to pega-console!')).toBeInTheDocument();
   });
 });

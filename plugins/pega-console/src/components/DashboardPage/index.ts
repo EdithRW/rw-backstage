@@ -1,0 +1,2 @@
+export {PegaConsoleApp} from './DashboardPage';
+

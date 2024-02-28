@@ -14,11 +14,17 @@
  * limitations under the License.
  */
 
-import { CardTab, Content, ContentHeader, GaugeCard, Header, HeaderLabel, HeaderTabs, InfoCard, Link, LogViewer, Page, StructuredMetadataTable, SupportButton, Tab, TabbedCard, TrendLine } from '@backstage/core-components';
+import { CardTab, Content, ContentHeader, GaugeCard, Header, HeaderLabel, HeaderTabs, InfoCard, Link, LogViewer, Page, StructuredMetadataTable, SupportButton, Tab, TabbedCard, Table, TableColumn, TrendLine } from '@backstage/core-components';
 
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import React, { PropsWithChildren,  useState } from 'react';
+import { PegaConsolePage } from '../../plugin';
+import { makeStyles } from '@material-ui/core';
+import ApplicationsTable from '../ApplicationsTable/ApplicationsTable';
+
+
+
 
 const metadata = {
   description:
@@ -37,7 +43,6 @@ const metadata = {
     },
   },
 };
-
 
 
 const Overview = () => {
@@ -116,102 +121,36 @@ const CostTest = () => {
 
 
 const tabMapping : any = {
-  Overview: Overview,
-  Compliance: CICD,
-  Logs: CostTest,
+  Applications: ApplicationsTable,
+  Cases: CICD,
+  Data: CostTest,
+  Integration: CostTest,
+  Resources: CostTest,
+  Systems: CostTest
 
 
 };
 
 
 const tabs = [
-  { label: 'Overview'},
-  { label: 'Compliance' },
-  { label: 'Logs' },
-
+  { label: 'Applications'},
+  { label: 'Cases' },
+  { label: 'Data' },
+  { label: 'Integrations' },
+  { label: 'Resources' },
+  { label: 'Systems' },
 ];
 
-const DataGrid = () => (
-  <Grid container>
-    <Grid item xs container>
-      <Grid item xs={12}>
-        <InfoCard title="Trend">
-          <TrendLine data={[0.1, 0.5, 0.9, 1.0]} title="Trend over time" />
-        </InfoCard>
-      </Grid>
-      <Grid
-        item
-        xs={12}
-        container
-        spacing={2}
-        justifyContent="space-between"
-        direction="row"
-      >
-        <Grid item xs={12} md={6}>
-          <GaugeCard
-            title="GKE Usage Score"
-            subheader="This should be above 75%"
-            progress={0.87}
-          />
-        </Grid>
-        <Grid item xs={12} md={6}>
-          <GaugeCard
-            title="Deployment Score"
-            subheader="This should be above 40%"
-            progress={0.58}
-          />
-        </Grid>
-      </Grid>
-    </Grid>
-    <Grid item xs>
-      <InfoCard
-        title="Additional Information"
-        deepLink={{ title: 'Learn more about GKE', link: '' }}
-      >
-        <Typography variant="h6">Rightsize GKE deployment</Typography>
-        <Typography paragraph>
-          Services are considered underutilized in GKE when the average usage of
-          requested cores is less than 80%.
-        </Typography>
-        <Typography variant="h6">What can I do?</Typography>
-        <Typography paragraph>
-          Review requested core and limit settings. Check HPA target scaling
-          settings in <code>hpa.yaml</code>. The recommended value for&nbsp;
-          <code>targetCPUUtilizationPercentage</code> is <code>80</code>.
-        </Typography>
-        <Typography paragraph>
-          For single pods, there is of course no HPA. But it can also be useful
-          to think about a single pod out of a larger deployment, then modify
-          based on HPA requirements. Within a pod, each container has its own
-          CPU and memory requests and limits.
-        </Typography>
-        <Typography variant="h6">Definitions</Typography>
-        <Typography paragraph>
-          A request is a minimum reserved value; a container will never have
-          less than this amount allocated to it, even if it doesn't actually use
-          it. Requests are used for determining what nodes to schedule pods on
-          (bin-packing). The tension here is between not allocating resources we
-          don't need, and having easy-enough access to enough resources to be
-          able to function.
-        </Typography>
-        <Typography paragraph>
-          Contact <Link to="#cost-awareness">#cost-awareness</Link> for
-          information and support.
-        </Typography>
-      </InfoCard>
-    </Grid>
-  </Grid>
-);
 
 
-const ExampleHeader = () => (
-  <Header title="LaunchPoint" subtitle="Test launchpoint Landing Page">
+const HomeHeader = () => (
+  <Header title="Pega Console" subtitle="See the status of all your systems">
     <HeaderLabel label="Owner" value="Rulesware" />
     <HeaderLabel label="Lifecycle" value="Development" />
   </Header>
 );
 
-const ExampleContentHeader = ({ selectedTab }: { selectedTab?: number }) => (
+const HomeContentHeader = ({ selectedTab }: { selectedTab?: number }) => (
   <ContentHeader
     title={selectedTab !== undefined ? tabs[selectedTab].label : 'Header'}
   >
@@ -224,7 +163,8 @@ const ExampleContentHeader = ({ selectedTab }: { selectedTab?: number }) => (
 
 );
 
-export const ExampleComponent = () => {
+
+export const HomePage = () => {
   const [selectedTab, setSelectedTab] = useState<number>(0);
 
   const renderTabContent = (label: string) => {
@@ -235,7 +175,7 @@ export const ExampleComponent = () => {
   return  (
     <div style={{ border: '0px solid #ddd' }}>
       <Page themeId="tool">
-        <ExampleHeader />
+        <HomeHeader />
 
         <HeaderTabs
           selectedIndex={selectedTab}
@@ -248,7 +188,7 @@ export const ExampleComponent = () => {
           }))}
         />
         <Content>
-          <ExampleContentHeader selectedTab={selectedTab} />
+          <HomeContentHeader selectedTab={selectedTab} />
           {renderTabContent(tabs[selectedTab].label)}
           
         </Content>
