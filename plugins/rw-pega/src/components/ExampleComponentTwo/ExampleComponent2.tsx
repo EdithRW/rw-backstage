@@ -48,13 +48,11 @@ export const DeveloperDashboard = () => {
           </Toolbar>
         </AppBar>
         <Grid container>
-          <Grid item xs={2} className={classes.menu}>
-            <SideMenuInt />
-          </Grid>
+          
           <Grid item xs={10} className={classes.content}>
             <Routes>
               <Route path="/rw-pega/applications/:applicationId" element={<ApplicationLandingPage />} />
-              <Route path="/rw-pega/applications" element={<ApplicationTable />} />
+              <Route path="/rw-pega" element={<ApplicationTable />} />
               {/* Add more routes here for other pages */}
             </Routes>
           </Grid>
