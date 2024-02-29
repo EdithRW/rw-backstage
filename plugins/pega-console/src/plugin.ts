@@ -13,9 +13,10 @@ export const PegaConsolePage = pegaConsolePlugin.provide(
   createRoutableExtension({
     name: 'PegaConsolePage',
     component: () =>
-      import('./components/DashboardPage').then(m => m.PegaConsoleApp),
+      import('./components/PegaConsoleApp').then(m => m.PegaConsoleApp),
     mountPoint: rootRouteRef,
   }),
 );
 
 
+  

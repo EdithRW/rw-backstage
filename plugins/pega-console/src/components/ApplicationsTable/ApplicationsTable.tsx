@@ -1,7 +1,6 @@
 import React from 'react';
 import { Table, TableColumn } from '@backstage/core-components';
-import { useParams, Link } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const generateTestData = (rows = 10) => {
   const data = [];
@@ -17,9 +16,8 @@ const generateTestData = (rows = 10) => {
   return data;
 };
 
-const ApplicationsTable = () => {
+export const ApplicationsTable = () => {
   
-  const navigate = useNavigate();
   const applications = generateTestData(10);
 
   const columns: TableColumn<typeof applications[0]>[] = [
@@ -27,9 +25,7 @@ const ApplicationsTable = () => {
       title: 'Name',
       field: 'name',
       render: (row) => (
-        <Link
-          to={`/pega-console/applications/${row.id}`}
-        >
+        <Link to={`/pega-console/applications/${row.id}`}>
           {row.name}
         </Link>
       ),
@@ -50,5 +46,3 @@ const ApplicationsTable = () => {
     </div>
   );
 };
-
-export default ApplicationsTable;

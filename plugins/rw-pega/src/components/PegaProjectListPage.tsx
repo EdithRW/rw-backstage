@@ -6,14 +6,10 @@ import {
   ContentHeader,
   Header,
   HeaderLabel,
-  Link,
   Page,
-  Table,
-  SupportButton,
-  WarningPanel,
+  SupportButton
 } from '@backstage/core-components';
 
-import { useApi } from '@backstage/core-plugin-api';
 
 import { Link as RouterLink } from 'react-router-dom';
 

@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
-import { Grid, Typography, makeStyles } from '@material-ui/core';
-import { Content, ContentHeader, Header, HeaderLabel, HeaderTabs, Link, Page, SupportButton, Table, TableColumn } from '@backstage/core-components';
-import { useParams } from 'react-router-dom';
-import { ApplicationLanding } from '../Pages/ApplicationLanding/ApplicationLanding';
-import ApplicationsTable from '../ApplicationsTable/ApplicationsTable';
+import { makeStyles } from '@material-ui/core';
+import { Content, ContentHeader, Header, HeaderLabel, HeaderTabs, Page, SupportButton } from '@backstage/core-components';
+import { ApplicationsTable } from '../../ApplicationsTable';
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -79,7 +77,7 @@ export const HomePage = () => {
 
   return  (
     <div style={{ border: '0px solid #ddd' }}>
-      <Page themeId="tool">
+      <Page themeId="home">
         <HomeHeader />
 
         <HeaderTabs

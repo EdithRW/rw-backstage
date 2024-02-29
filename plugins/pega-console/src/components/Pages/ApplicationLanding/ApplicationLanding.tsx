@@ -2,11 +2,13 @@ import { Content, ContentHeader, Header, HeaderLabel, HeaderTabs, Page, SupportB
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-import { OverviewPage } from '../../Applications/OverviewPage/OverviewPage';
-import { BranchesPage } from '../../Applications/BranchesPage/BranchesPage';
-import { CasesPage } from '../../Applications/CasesPage/CasesPage';
-import { DataPage } from '../../Applications/DataPage/DataPage';
-import { IntegrationsPage } from '../../Applications/IntegrationsPage/IntegrationsPage';
+import { OverviewPage } from '../../Applications/OverviewPage';
+import { BranchesPage } from '../../Applications/BranchesPage';
+import { CasesPage } from '../../Applications/CasesPage';
+import { DataPage } from '../../Applications/DataPage';
+import { IntegrationsPage } from '../../Applications/IntegrationsPage';
+import { useRouteRef } from '@backstage/core-plugin-api';
+import { rootRouteRef } from '../../../routes';
 
 
 
@@ -27,12 +29,22 @@ const tabMapping : any = {
     { label: 'Integrations' },
   ];
 
-  const AppHeader = () => (
-    <Header title="Application Name (tbc)" subtitle="See the status of all your systems">
+  interface AppHeaderProps {
+    appID: string; // Define the type of ID parameter
+  }
+  
+  const AppHeader: React.FC<AppHeaderProps> = ({ appID }) => {
+    const docsRootLink = useRouteRef(rootRouteRef)();
+
+    return (
+
+    <Header title={`Application ${appID}`} subtitle="See the status of all your systems" type="Home" typeLink={docsRootLink}>
       <HeaderLabel label="Owner" value="Rulesware" />
       <HeaderLabel label="Lifecycle" value="Development" />
     </Header>
-  );
+    
+    )
+  };
 
   const AppContentHeader = ({ selectedTab }: { selectedTab?: number }) => (
     <ContentHeader
@@ -43,7 +55,6 @@ const tabMapping : any = {
         the user.
       </SupportButton>
     </ContentHeader>
-  
   
   );
 
@@ -58,6 +69,7 @@ interface Props {
 
 
 export const ApplicationLanding: React.FC<Props> = ({ match }) => {
+
 
     const { applicationId } = useParams<{ applicationId: string }>();
   // Example application data
@@ -82,8 +94,8 @@ export const ApplicationLanding: React.FC<Props> = ({ match }) => {
   if (application) {
     return (
         <div style={{ border: '0px solid #ddd' }}>
-        <Page themeId="tool">
-          <AppHeader />
+        <Page themeId="website">
+          <AppHeader appID={`${applicationId}`} />
           {applicationId}
   
           <HeaderTabs
