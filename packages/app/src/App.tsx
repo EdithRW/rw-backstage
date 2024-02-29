@@ -39,7 +39,7 @@ import { SignInProviderConfig, SignInPage } from '@backstage/core-components';
 
 import { TestOnePage } from '@internal/plugin-test-one';
 import { PegaDashboardPage } from '@internal/plugin-pega-dashboard'
-import { RwPegaPage } from '@internal/plugin-rw-pega';
+import { RWPegaConsolePage } from '@internal/plugin-rw-pega';
 import { PegaConsolePage } from '@internal/plugin-pega-console';
 
 
@@ -120,7 +120,7 @@ const routes = (
     <Route path="/catalog-graph" element={<CatalogGraphPage />} />
     <Route path="/test-one" element={<TestOnePage />} />
     <Route path="/pega" element={<PegaDashboardPage />} />
-    <Route path="/rw-pega" element={<RwPegaPage />} />
+    <Route path="/rw-pega-console" element={<RWPegaConsolePage />} />
     <Route path="/pega-console" element={<PegaConsolePage />} />
   </FlatRoutes>
 );

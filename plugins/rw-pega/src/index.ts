@@ -1,1 +1,1 @@
-export { rwPegaPlugin, RwPegaPage } from './plugin';
+export { RWPegaConsolePage } from './plugin';

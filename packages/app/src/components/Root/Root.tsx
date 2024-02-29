@@ -81,7 +81,7 @@ export const Root = ({ children }: PropsWithChildren<{}>) => (
           <SidebarItem icon={MapIcon} to="tech-radar" text="Tech Radar" />
           <SidebarItem icon={LibraryBooks} to="test-one" text="Test Plugin" />
           <SidebarItem icon={LibraryBooks} to="pega-console" text="Pega Console" />
-          <SidebarItem icon={LibraryBooks} to="rw-pega" text="test nav" />
+          <SidebarItem icon={LibraryBooks} to="rw-pega-console" text="rw-pega" />
 
         </SidebarScrollWrapper>
       </SidebarGroup>
